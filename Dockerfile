@@ -15,7 +15,8 @@ RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-english.
 	tar -xzvf phpMyAdmin-5.0.2-english.tar.gz && \
 	mv phpMyAdmin-5.0.2-english/ /var/www/html/phpmyadmin && \
 	rm -rf phpMyAdmin-5.0.2-english.tar.gz
+COPY srcs/phpmyadmin/config.inc.php /var/www/html/phpmyadmin
 
-RUN wget https://wordpress.org/latest.tar.gz && 
+RUN wget https://wordpress.org/latest.tar.gz &&
 
 EXPOSE 80 443
