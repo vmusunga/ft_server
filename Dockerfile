@@ -15,8 +15,8 @@ RUN apt-get update && apt-get install -y \
 	wget
 
 #NGINX
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf && \
-	rm var/www/html/index.nginx-debian.html
+#RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+RUN rm var/www/html/index.nginx-debian.html
 COPY ./srcs/nginx/*.conf /tmp/
 
 #PHP
