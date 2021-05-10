@@ -17,20 +17,19 @@ RUN apt-get update && apt-get install -y \
 #NGINX
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm var/www/html/index.nginx-debian.html
-COPY ./srcs/nginx/*.conf /tmp/
+COPY ./srcs/nginx/nginx_autoindex_off.conf tmp
+COPY ./srcs/nginx/nginx_autoindex_on.conf tmp
 
 #PHP
-RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-english.tar.gz && \
-	tar -xzvf phpMyAdmin-5.0.2-english.tar.gz && \
-	mv phpMyAdmin-5.0.2-english/ /var/www/html/phpmyadmin && \
-	rm -rf phpMyAdmin-5.0.2-english.tar.gz
+RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-english.tar.gz
+RUN tar -xvzf phpMyAdmin-5.0.2-english.tar.gz && rm -rf phpMyAdmin-5.0.2-english.tar.gz
+RUN mv phpMyAdmin-5.0.2-english/ /var/www/html/phpmyadmin
 COPY ./srcs/phpmyadmin/config.inc.php /var/www/html/phpmyadmin
 
 #WORDPRESS
-RUN wget https://wordpress.org/latest.tar.gz && \
-	tar -xzvf latest.tar.gz && \
-	rm -rf latest.tar.gz && \
-	mv wordpress /var/www/html/
+RUN wget https://wordpress.org/latest.tar.gz
+RUN tar -xvzf latest.tar.gz && rm -rf latest.tar.gz
+RUN mv wordpress /var/www/html
 COPY ./srcs/wordpress/wp-config.php /var/www/html/wordpress
 
 #SSL https://linuxize.com/post/creating-a-self-signed-ssl-certificate/
