@@ -1,0 +1,13 @@
+#SCRIPT DOCKER RUN
+rm -rf ~/Library/Containers/com.docker.docker
+rm -rf ~/.docker
+rm -rf /goinfre/${USER}/docker /goinfre/${USER}/agent
+mkdir -p /goinfre/${USER}/docker /goinfre/${USER}/agent
+ln -s /goinfre/${USER}/agent ~/Library/Containers/com.docker.docker
+ln -s /goinfre/${USER}/docker ~/.docker
+
+#COMMANDS
+docker build -t ft_server .
+docker run --name ft_server -d -p 443:443 -p 80:80 ft_server
+docker exec -it ft_server bash
+docker run --env AUTOINDEX=off --name ft_server -d -p 443:443 -p 80:80 ft_server
